@@ -1,5 +1,5 @@
 ---
-title: Roblox Educators
+title: Roblox educators
 description: A list of schools, summer camps, and online educators offering Roblox in education for students and parents.
 ---
 
@@ -9,7 +9,7 @@ Around the world, educators are using Roblox to teach coding, design thinking, e
 All educators and external links on this page are provided as a service to our community by Roblox and don't intend to be an endorsement of their work.
 </Alert>
 
-## Featured Educators
+## Featured educators
 
 Our Featured Educators represent the best that the Roblox Education community has to provide. They're selected on a yearly basis by our team for their exemplary work in using Roblox to educate and inspire others.
 
@@ -118,11 +118,11 @@ Our Featured Educators represent the best that the Roblox Education community ha
 </tbody>
 </table>
 
-## All Educators
+## All educators
 
 We have many educators across the world teaching with Roblox. If you're interested in being added to this list, [contact us](https://roblox.qualtrics.com/jfe/form/SV_8oiiVEvjteux7hk).
 
-### Online Educators
+### Online educators
 
 <Grid container spacing={3}>
  <Grid item XSmall={6}>
@@ -218,7 +218,7 @@ We have many educators across the world teaching with Roblox. If you're interest
 <a href="https://www.youtube.com/c/SpooksHD" title="SpooksHD">SpooksHD</a><br/>
 <a href="https://www.youtube.com/channel/UCLkSx-YvsK7QwEsrPIj0trg" title="Virtual Escritory">Virtual Escritory</a>
 
-### All Countries
+### All countries
 
 #### United States
 
@@ -593,6 +593,7 @@ We have many educators across the world teaching with Roblox. If you're interest
 <a href="https://algoritmika.org/" title="Algorithmics">Algorithmics</a>
 <a href="https://coddyschool.com/courses/sozdanie_igr_v_roblox_studio/" title="CODDY">CODDY</a>
 <a href="https://start.codabra.org/" title="Codabra">Codabra</a>
+<a href="https://era-it-center.ru/roblox-studio/" title="Era IT">Era IT</a>
 <a href="https://excklusiveit.com/" title="Exclusive-It">Exclusive-It</a>
 <a href="https://impactacademies.ru/" title="impactRu">impact Academies and Camps</a>
 <a href="https://kiber-one.com/moduli/roblox-studio-sdelat-vse-chto-vy-mozhete-sebe-predstavit/" title="KIBERone Russia">KIBERone Russia</a>

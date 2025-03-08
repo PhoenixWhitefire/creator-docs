@@ -318,9 +318,9 @@ properties:
       for a player's `Class.Player.Character|character`.
     description: |
       This property determines the user ID of the account whose character
-      appearance is used for a player's `Class.Player.Character`. By default,
-      this property is the `Class.Player.UserId`, which uses the player's avatar
-      as they have created it on the Roblox website.
+      appearance is used for a player's `Class.Player.Character|character`. By
+      default, this property is the `Class.Player.UserId`, which uses the
+      player's avatar as they have created it on the Roblox website.
 
       Changing this property to the user ID of another account will cause the
       player to spawn with that account's appearance (hats, shirt, pants, etc).
@@ -964,6 +964,23 @@ properties:
       can_save: true
     capabilities: []
     writeCapabilities: []
+  - name: Player.StepIdOffset
+    summary: ''
+    description: ''
+    code_samples: []
+    type: int
+    tags: []
+    deprecation_message: ''
+    security:
+      read: RobloxSecurity
+      write: RobloxSecurity
+    thread_safety: ReadSafe
+    category: Data
+    serialization:
+      can_load: true
+      can_save: true
+    capabilities: []
+    writeCapabilities: []
   - name: Player.Team
     summary: |
       Determines the Team with which a Player is associated.
@@ -1023,6 +1040,25 @@ properties:
       can_save: true
     capabilities: []
     writeCapabilities: []
+  - name: Player.ThirdPartyTextChatRestrictionStatus
+    summary: ''
+    description: ''
+    code_samples: []
+    type: ChatRestrictionStatus
+    tags:
+      - ReadOnly
+      - NotReplicated
+    deprecation_message: ''
+    security:
+      read: RobloxScriptSecurity
+      write: RobloxScriptSecurity
+    thread_safety: ReadSafe
+    category: Data
+    serialization:
+      can_load: false
+      can_save: true
+    capabilities: []
+    writeCapabilities: []
   - name: Player.UserId
     summary: |
       A unique identifying integer assigned to all user accounts.
@@ -1075,6 +1111,24 @@ properties:
     capabilities: []
     writeCapabilities: []
 methods:
+  - name: Player:AddReplicationFocus
+    summary: ''
+    description: ''
+    code_samples: []
+    parameters:
+      - name: part
+        type: BasePart
+        default:
+        summary: ''
+    returns:
+      - type: void
+        summary: ''
+    tags: []
+    deprecation_message: ''
+    security: None
+    thread_safety: Unsafe
+    capabilities: []
+    writeCapabilities: []
   - name: Player:ClearCharacterAppearance
     summary: |
       Removes all accessories and other character appearance objects from a
@@ -1116,7 +1170,7 @@ methods:
       instances or positions, you can use the following:
 
       ```lua
-      local distance = (position1 - position2).magnitude
+      local distance = (position1 - position2).Magnitude
       ```
     code_samples:
       - Player-DistanceFromCharacter1
@@ -1181,7 +1235,7 @@ methods:
           <tr>
             <th> LaunchData </th>
             <td> string </td>
-            <td>A plain or JSON encoded string that contains launch data specified in a <a href="../../../production/promotion/deeplinking.md">deep link</a> URL or
+            <td>A plain or JSON encoded string that contains launch data specified in a <a href="../../../production/promotion/deeplinks.md">deep link</a> URL or
             <code>Class.ExperienceInviteOptions.LaunchData</code>.</td>
           </tr>
           <tr>
@@ -1570,6 +1624,24 @@ methods:
         summary: |
           A boolean indicating whether the player should move relative to the
           player's camera.
+    returns:
+      - type: void
+        summary: ''
+    tags: []
+    deprecation_message: ''
+    security: None
+    thread_safety: Unsafe
+    capabilities: []
+    writeCapabilities: []
+  - name: Player:RemoveReplicationFocus
+    summary: ''
+    description: ''
+    code_samples: []
+    parameters:
+      - name: part
+        type: BasePart
+        default:
+        summary: ''
     returns:
       - type: void
         summary: ''
@@ -2505,6 +2577,8 @@ events:
       `Class.Shirt|Shirts`, `Class.Pants` and
       `Class.CharacterMesh|CharacterMeshes`. This event will fire when all such
       objects have been inserted into the `Class.Player.Character`.
+
+      This event only fires on the server.
 
       One use for this event is to ensure all accessories have loaded before
       destroying them. See below for an example of this.

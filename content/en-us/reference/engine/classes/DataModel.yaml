@@ -206,6 +206,25 @@ properties:
       can_save: false
     capabilities: []
     writeCapabilities: []
+  - name: DataModel.MatchmakingType
+    summary: ''
+    description: ''
+    code_samples: []
+    type: MatchmakingType
+    tags:
+      - ReadOnly
+      - NotReplicated
+    deprecation_message: ''
+    security:
+      read: None
+      write: None
+    thread_safety: ReadSafe
+    category: Data
+    serialization:
+      can_load: false
+      can_save: true
+    capabilities: []
+    writeCapabilities: []
   - name: DataModel.PlaceId
     summary: |
       Describes the ID of the place running on the server.
@@ -447,20 +466,8 @@ properties:
     summary: |
       A reference to the `Class.Workspace` service.
     description: |
-      The Workspace property is a reference to the `Class.Workspace` service.
-
-      This property will always point to the `Class.Workspace` and will never be
-      _nil_.
-
-      The `Class.Workspace` can also be accessed using the global variable
-      `workspace` and the `Class.ServiceProvider:GetService()` function. For
-      example:
-
-      ```lua
-      workspace -- a global variable
-      game.Workspace -- a property of the DataModel (game)
-      game:GetService("Workspace") -- workspace is a service
-      ```
+      This property is a reference to the `Class.Workspace` service. It always
+      points to `Class.Workspace` and will never be `nil`.
     code_samples:
     type: Workspace
     tags:
@@ -765,16 +772,13 @@ methods:
       Returns true if the client has finished loading the game for the first
       time.
     description: |
-      This function returns true if the client has finished loading the game for
-      the first time.
-
       When all initial `Class.Instance|Instances` in the game have finished
-      replicating to the client, this function will return true.
+      replicating to the client, this function returns true.
 
       Unless they are parented to `Class.ReplicatedFirst`,
-      `Class.LocalScript|LocalScripts` will not run while the game has not
-      loaded. The following snippet, ran from a `Class.LocalScript` in
-      `Class.ReplicatedFirst` will yield until the game has loaded:
+      `Class.LocalScript|LocalScripts` do not run until the game has loaded.
+      The following snippet, run from a `Class.LocalScript` in
+      `Class.ReplicatedFirst` yields until the game has loaded:
 
       ```lua
       if not game:IsLoaded() then
@@ -784,10 +788,12 @@ methods:
 
       See also:
 
+      - [Replication order](../../../scripting/attributes.md#replication-order)
+        for a more detailed summary of the loading process.
       - `Class.DataModel.Loaded`, an event that fires when the game has loaded
       - `Class.Instance:WaitForChild()`, a function which can be used to wait
         for an individual `Class.Instance` to replicate without having to wait
-        for the whole game to
+        for the whole game to finish loading.
     code_samples:
       - Custom-Loading-Screen
     parameters: []
@@ -991,18 +997,15 @@ events:
     summary: |
       Fires on the client when the game finishes loading for the first time.
     description: |
-      This event fires on the client when the game finishes loading for the
-      first time.
-
-      The Loaded event fires when all initial `Class.Instance|Instances` in the
-      game have finished replicating to the client.
+      This event fires on the client when all initial `Class.Instance|Instances`
+      in the game have finished replicating to the client.
 
       Unless they are parented to `Class.ReplicatedFirst`,
-      `Class.LocalScript|LocalScripts` will not run prior to this event firing.
-      The following snippet, ran from a `Class.LocalScript` in
-      `Class.ReplicatedFirst`, will yield until the game has loaded:
+      `Class.LocalScript|LocalScripts` do not run until the game has loaded.
+      The following snippet, run from a `Class.LocalScript` in
+      `Class.ReplicatedFirst` yields until the game has loaded:
 
-      ```
+      ```lua
       if not game:IsLoaded() then
           game.Loaded:Wait()
       end
@@ -1010,11 +1013,12 @@ events:
 
       See also:
 
-      - `Class.DataModel:IsLoaded()`, a function that returns if the game is
-        loaded or not
+      - [Replication order](../../../scripting/attributes.md#replication-order)
+        for a more detailed summary of the loading process.
+      - `Class.DataModel.Loaded`, an event that fires when the game has loaded
       - `Class.Instance:WaitForChild()`, a function which can be used to wait
         for an individual `Class.Instance` to replicate without having to wait
-        for the whole game to load.
+        for the whole game to finish loading.
     code_samples:
     parameters: []
     tags: []

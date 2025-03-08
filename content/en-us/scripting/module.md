@@ -1,11 +1,11 @@
 ---
-title: Reusing Code
+title: Reuse code
 description: How to use module scripts to reuse code.
 ---
 
-After creating a few scripts, it's never long before you want to reuse some code between them. Depending on [location](location.md), `Class.ModuleScript|ModuleScripts` let you reuse code between scripts on different sides of the client-server boundary or the same side of the boundary.
+After creating a few scripts, it's never long before you want to reuse some code between them. Depending on [location](./locations.md), `Class.ModuleScript|ModuleScripts` let you reuse code between scripts on different sides of the client-server boundary or the same side of the boundary.
 
-## Creating Module Scripts
+## Create module scripts
 
 You can put module scripts anywhere that you put scripts, but `Class.ReplicatedStorage` is a popular location; storing module scripts here lets you reuse code between the server and clients.
 
@@ -14,7 +14,7 @@ You can put module scripts anywhere that you put scripts, but `Class.ReplicatedS
 1. Right-click the script and rename it to `PickupManager`.
 1. Double-click the script to open it in the [Script Editor](../studio/script-editor.md).
 
-## Anatomy of a Module Script
+## Anatomy of a module script
 
 Each `Class.ModuleScript` starts with the following code:
 
@@ -57,14 +57,14 @@ return PickupManager
 
 Adding the function to a table isn't strictly necessary—you could just return the function itself—but it's a good pattern to follow; it gives you an easy-to-understand syntax when you call the function from another script and lets you easily add more functions to the module script over time.
 
-## Requiring Module Scripts
+## Require module scripts
 
 To load a module script, you call the `Global.LuaGlobals.require()` function. In `ReplicatedStorage`, add a new script, and change its `RunContext` to `Client`. Then add the following code to call the `PickupManager.getPickupBonus` function:
 
 ```lua title="Client script in ReplicatedStorage"
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
--- Get value returned by ModuleScript
+-- Get the value returned by the ModuleScript
 local PickupManager = require(ReplicatedStorage:WaitForChild("PickupManager"))
 
 -- Call a ModuleScript function
@@ -72,12 +72,11 @@ local bonus = PickupManager.getPickupBonus("legendary")
 print(bonus)  --> 125
 ```
 
-You can use the same code to require the script from `ServerScriptService`:
+Storing module scripts in `ReplicatedStorage` lets you share code between the server and clients. Use the same code to require the script from `ServerScriptService`:
 
-```lua title="Script in ServerScriptStorage"
+```lua title="Script in ServerScriptService"
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
--- Get the return value for the ModuleScript named "PickupManager"
 local PickupManager = require(ReplicatedStorage:WaitForChild("PickupManager"))
 ```
 
@@ -87,7 +86,7 @@ The `Class.Instance:WaitForChild()` pattern is an important safety measure due t
 
 When you call `Global.LuaGlobals.require()` on a `Class.ModuleScript`, it runs once and returns a single item as a reference. Calling `Global.LuaGlobals.require()` again returns the exact same reference, meaning that if you modify a returned [table](../luau/tables.md) or `Class.Instance`, subsequent `Global.LuaGlobals.require()` calls return that modified reference. The module itself doesn't run multiple times.
 
-If you require a `Class.ModuleScript` from both sides of the client-server boundary, the `Class.ModuleScript` returns a unique reference for each side.
+If you require a `Class.ModuleScript` from both sides of the client-server boundary, as in the example above, the `Class.ModuleScript` returns a unique reference for each side.
 
 ## Patterns
 
@@ -97,7 +96,7 @@ Module scripts have some common patterns that you can use to simplify your code 
 Most of these patterns require an understanding of events. If you're not familiar with them, see [Events](events.md).
 </Alert>
 
-### Data Sharing
+### Data sharing
 
 To associate data with individual objects, you can assign attributes to them or create `Class.Configuration` folders with value objects such as `Class.StringValue` or `Class.IntValue`. However, both approaches are troublesome if you want to add or modify dozens of objects or data values. They also don't store tables or functions.
 
@@ -122,7 +121,7 @@ GunConfig.Damage = {
 return GunConfig
 ```
 
-### Custom Events
+### Custom events
 
 Custom events enable scripts to communicate with each other, but having to keep track of references to individual `Class.BindableEvent` objects can clutter your code.
 
